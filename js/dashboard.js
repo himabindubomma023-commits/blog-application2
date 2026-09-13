@@ -1,24 +1,32 @@
-// Fetch all blogs from the backend
+
+// =========================
+// CHECK LOGIN
+// =========================
+
+const user = localStorage.getItem("user");
+
+if (!user) {
+    window.location.href = "login.html";
+}// Fetch all blogs from the backend
+
 fetch("http://localhost:3000/api/blogs")
     .then(response => response.json())
     .then(blogs => {
 
         const blogContainer = document.getElementById("blogContainer");
         const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
 
         // Function to display blogs
         function displayBlogs(blogsToDisplay) {
 
-            // Clear blog container
             blogContainer.innerHTML = "";
 
-            // If no blogs are available
             if (blogsToDisplay.length === 0) {
                 blogContainer.innerHTML = "<p>No blogs found.</p>";
                 return;
             }
 
-            // Display each blog
             blogsToDisplay.forEach(blog => {
 
                 const blogCard = document.createElement("div");
@@ -55,7 +63,6 @@ fetch("http://localhost:3000/api/blogs")
                     </div>
                 `;
 
-                // Make blog clickable
                 blogCard.style.cursor = "pointer";
 
                 blogCard.addEventListener("click", function () {
@@ -66,16 +73,12 @@ fetch("http://localhost:3000/api/blogs")
                 });
 
 
-                // =========================
                 // EDIT BLOG
-                // =========================
-
                 const editButton =
                     blogCard.querySelector(".edit-btn");
 
                 editButton.addEventListener("click", async function (event) {
 
-                    // Prevent opening blog details
                     event.stopPropagation();
 
                     const newTitle = prompt(
@@ -83,27 +86,21 @@ fetch("http://localhost:3000/api/blogs")
                         blog.title
                     );
 
-                    if (newTitle === null) {
-                        return;
-                    }
+                    if (newTitle === null) return;
 
                     const newCategory = prompt(
                         "Enter new category:",
                         blog.category
                     );
 
-                    if (newCategory === null) {
-                        return;
-                    }
+                    if (newCategory === null) return;
 
                     const newContent = prompt(
                         "Enter new content:",
                         blog.content
                     );
 
-                    if (newContent === null) {
-                        return;
-                    }
+                    if (newContent === null) return;
 
                     try {
 
@@ -138,40 +135,30 @@ fetch("http://localhost:3000/api/blogs")
                                 data.message ||
                                 "Blog update failed."
                             );
-
                         }
 
                     } catch (error) {
 
                         console.error(error);
 
-                        alert(
-                            "Unable to update blog."
-                        );
+                        alert("Unable to update blog.");
                     }
-
                 });
 
 
-                // =========================
                 // DELETE BLOG
-                // =========================
-
                 const deleteButton =
                     blogCard.querySelector(".delete-btn");
 
                 deleteButton.addEventListener("click", async function (event) {
 
-                    // Prevent opening blog details
                     event.stopPropagation();
 
                     const confirmDelete = confirm(
                         "Are you sure you want to delete this blog?"
                     );
 
-                    if (!confirmDelete) {
-                        return;
-                    }
+                    if (!confirmDelete) return;
 
                     try {
 
@@ -196,18 +183,14 @@ fetch("http://localhost:3000/api/blogs")
                                 data.message ||
                                 "Blog deletion failed."
                             );
-
                         }
 
                     } catch (error) {
 
                         console.error(error);
 
-                        alert(
-                            "Unable to delete blog."
-                        );
+                        alert("Unable to delete blog.");
                     }
-
                 });
 
 
@@ -217,18 +200,18 @@ fetch("http://localhost:3000/api/blogs")
         }
 
 
-        // Display all blogs initially
+        // Display all blogs
         displayBlogs(blogs);
 
 
-        // =========================
         // SEARCH BLOGS
-        // =========================
-
-        searchInput.addEventListener("input", function () {
+        function filterBlogs() {
 
             const searchText =
                 searchInput.value.toLowerCase().trim();
+
+            const selectedCategory =
+                categoryFilter.value;
 
             const filteredBlogs = blogs.filter(blog => {
 
@@ -238,16 +221,31 @@ fetch("http://localhost:3000/api/blogs")
                 const content =
                     (blog.content || "").toLowerCase();
 
-                return (
+                const matchesSearch =
                     title.includes(searchText) ||
-                    content.includes(searchText)
-                );
+                    content.includes(searchText);
 
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    blog.category === selectedCategory;
+
+                return matchesSearch && matchesCategory;
             });
 
             displayBlogs(filteredBlogs);
+        }
 
-        });
+
+        searchInput.addEventListener(
+            "input",
+            filterBlogs
+        );
+
+
+        categoryFilter.addEventListener(
+            "change",
+            filterBlogs
+        );
 
     })
     .catch(error => {
@@ -263,3 +261,27 @@ fetch("http://localhost:3000/api/blogs")
         blogContainer.innerHTML =
             "<p>Unable to load blogs. Please try again.</p>";
     });
+
+
+// =========================
+// LOGOUT
+// =========================
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            localStorage.removeItem("user");
+
+            window.location.href =
+                "login.html";
+        }
+    );
+}
