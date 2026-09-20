@@ -4,8 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("./User");
-const Blog = require("./Blog");
+const User = require("./user");
+const Blog = require("./blog");
 const cors = require("cors");
 const path = require("path");
 
