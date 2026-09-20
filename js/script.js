@@ -1,7 +1,125 @@
 // ==========================================
 // SCRIPT.JS
-// LOGIN + CREATE BLOG + HOME BLOGS
+// REGISTER + LOGIN + CREATE BLOG + HOME BLOGS
 // ==========================================
+
+
+// ==========================================
+// REGISTER
+// ==========================================
+
+const registerForm =
+    document.getElementById("registerForm");
+
+console.log("REGISTER/LOGIN JS LOADED");
+
+if (registerForm) {
+
+    registerForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            const name =
+                document
+                    .getElementById("registerName")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("registerEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("registerPassword")
+                    .value;
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+            // Check passwords
+            if (password !== confirmPassword) {
+
+                alert("Passwords do not match.");
+
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/register",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    name: name,
+                                    email: email,
+                                    password: password
+                                })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "REGISTER RESPONSE:",
+                    data
+                );
+
+
+                if (!response.ok) {
+
+                    alert(
+                        data.message ||
+                        "Registration failed"
+                    );
+
+                    return;
+                }
+
+
+                alert(
+                    data.message ||
+                    "Registration successful!"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+            } catch (error) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+                alert(
+                    "Unable to connect to server."
+                );
+            }
+        }
+    );
+}
 
 
 // ==========================================
@@ -10,8 +128,6 @@
 
 const loginForm =
     document.getElementById("loginForm");
-
-console.log("LOGIN JS LOADED");
 
 if (loginForm) {
 
