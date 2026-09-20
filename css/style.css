@@ -1,23 +1,32 @@
+/* ==========================================
+   GLOBAL RESET
+========================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #f5f7fb;
     color: #111;
     line-height: 1.6;
 }
 
 
-/* ------------------------------
-   Navigation
------------------------------- */
+/* ==========================================
+   NAVIGATION
+========================================== */
 
 header {
     background-color: #23438c;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .navbar {
@@ -39,33 +48,37 @@ header {
 
 nav {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 28px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 17px;
+    transition: 0.3s;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    opacity: 0.8;
 }
 
 
-/* ------------------------------
-   Hero
------------------------------- */
+/* ==========================================
+   HERO SECTION
+========================================== */
 
 .hero {
     max-width: 1200px;
     margin: auto;
 
-    min-height: 360px;
+    min-height: 380px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    gap: 40px;
 
     padding: 60px 25px;
 
@@ -78,11 +91,13 @@ nav a:hover {
 
 .hero-content h1 {
     font-size: 48px;
+    line-height: 1.2;
     margin-bottom: 20px;
 }
 
 .hero-content p {
     font-size: 20px;
+    color: #555;
     margin-bottom: 30px;
 }
 
@@ -93,14 +108,19 @@ nav a:hover {
 .hero-image img {
     width: 100%;
     max-height: 280px;
+
     object-fit: cover;
-    border-radius: 12px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 
-/* ------------------------------
-   Buttons
------------------------------- */
+/* ==========================================
+   BUTTONS
+========================================== */
 
 .btn {
     display: inline-block;
@@ -116,44 +136,59 @@ nav a:hover {
     text-decoration: none;
 
     font-size: 17px;
+    font-weight: bold;
 
     cursor: pointer;
+
+    transition: 0.3s;
 }
 
 .btn:hover {
     background-color: #162e68;
+    transform: translateY(-2px);
 }
 
 
-/* ------------------------------
-   Latest Blogs
------------------------------- */
+/* ==========================================
+   BLOG SECTION
+========================================== */
 
 .blogs {
-    padding: 50px 25px;
-    background-color: #f3f3f3;
+    padding: 55px 25px;
+
+    background-color: #f5f7fb;
 }
 
 .blogs h2 {
     text-align: center;
+
     font-size: 38px;
+
     margin-bottom: 35px;
 }
 
+
+/* ==========================================
+   BLOG CONTAINER
+========================================== */
+
 .blog-container {
     max-width: 1100px;
+
     margin: auto;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
 
     gap: 30px;
 }
 
 
-/* ------------------------------
-   Blog Cards
------------------------------- */
+/* ==========================================
+   BLOG CARDS
+========================================== */
 
 .blog-card {
     background-color: white;
@@ -162,22 +197,46 @@ nav a:hover {
 
     overflow: hidden;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.12);
 
-    transition: transform 0.3s;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
 
-    padding: 20px;
+    padding: 22px;
 
     text-align: left;
 }
 
 .blog-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.blog-card h3 {
+    color: #23438c;
+
+    font-size: 22px;
+
+    margin-bottom: 12px;
+}
+
+.blog-card p {
+    margin-bottom: 12px;
+
+    color: #444;
+
+    word-wrap: break-word;
 }
 
 .blog-card img {
     width: 100%;
+
     height: 190px;
+
     object-fit: cover;
 }
 
@@ -195,18 +254,21 @@ nav a:hover {
 
 .read-more {
     color: #23438c;
+
     text-decoration: none;
+
     font-weight: bold;
 }
 
 
-/* ------------------------------
-   Forms
------------------------------- */
+/* ==========================================
+   FORMS
+========================================== */
 
 .form-container {
     width: 450px;
-    max-width: 90%;
+
+    max-width: calc(100% - 30px);
 
     margin: 60px auto;
 
@@ -214,22 +276,27 @@ nav a:hover {
 
     padding: 35px;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.12);
 }
 
 .form-container h2 {
     text-align: center;
+
     margin-bottom: 25px;
+
     font-size: 30px;
+
+    color: #23438c;
 }
 
 form label {
     display: block;
 
     margin-top: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 
     font-weight: bold;
 }
@@ -243,34 +310,56 @@ form textarea {
 
     border: 1px solid #ccc;
 
-    border-radius: 6px;
+    border-radius: 7px;
 
     font-size: 16px;
+
+    font-family: inherit;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #23438c;
+
+    box-shadow:
+        0 0 0 2px rgba(35, 67, 140, 0.1);
 }
 
 form textarea {
     resize: vertical;
+
+    min-height: 150px;
 }
 
 form .btn {
     width: 100%;
+
     margin-top: 25px;
 }
 
 form p {
     text-align: center;
+
     margin-top: 20px;
 }
 
 form p a {
     color: #23438c;
+
     font-weight: bold;
+
+    text-decoration: none;
 }
 
 
-/* ------------------------------
-   Dashboard
------------------------------- */
+/* ==========================================
+   DASHBOARD
+========================================== */
 
 .dashboard {
     max-width: 1100px;
@@ -284,17 +373,103 @@ form p a {
 
 .dashboard h1 {
     font-size: 38px;
+
     margin-bottom: 10px;
+
+    color: #23438c;
 }
 
 .dashboard-text {
     margin-bottom: 25px;
+
+    color: #555;
 }
 
 .dashboard h2 {
-    margin: 50px 0 25px;
+    margin: 45px 0 25px;
+
     font-size: 30px;
 }
+
+
+/* ==========================================
+   PROFILE SECTION
+========================================== */
+
+.profile-section {
+    max-width: 600px;
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    text-align: left;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+    margin: 0 0 15px;
+
+    color: #23438c;
+
+    font-size: 25px;
+}
+
+.profile-section p {
+    margin: 8px 0;
+
+    color: #444;
+}
+
+
+/* ==========================================
+   SEARCH + FILTER
+========================================== */
+
+.search-container {
+    max-width: 900px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+
+    gap: 15px;
+}
+
+.search-container input,
+.search-container select {
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    background-color: white;
+}
+
+.search-container input {
+    flex: 1;
+}
+
+.search-container input:focus,
+.search-container select:focus {
+    border-color: #23438c;
+}
+
+
+/* ==========================================
+   DASHBOARD CARD
+========================================== */
 
 .dashboard-card {
     background-color: white;
@@ -305,7 +480,8 @@ form p a {
 
     text-align: left;
 
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 .dashboard-card h3 {
@@ -313,9 +489,9 @@ form p a {
 }
 
 
-/* ------------------------------
-   Blog Action Buttons
------------------------------- */
+/* ==========================================
+   BLOG ACTION BUTTONS
+========================================== */
 
 .blog-actions {
     display: flex;
@@ -331,19 +507,19 @@ form p a {
 
 .edit-btn,
 .delete-btn {
-    display: inline-block;
-
     border: none;
 
     padding: 9px 18px;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     cursor: pointer;
 
     font-size: 15px;
 
     font-weight: bold;
+
+    transition: 0.2s;
 }
 
 .edit-btn {
@@ -354,24 +530,60 @@ form p a {
 
 .edit-btn:hover {
     background-color: #162e68;
+
+    transform: translateY(-1px);
 }
 
 .delete-btn {
     background-color: #d9534f;
 
     color: white;
-
-    margin-left: 0;
 }
 
 .delete-btn:hover {
     background-color: #c9302c;
+
+    transform: translateY(-1px);
 }
 
 
-/* ------------------------------
-   Footer
------------------------------- */
+/* ==========================================
+   BLOG DETAILS
+========================================== */
+
+#blogDetails {
+    max-width: 900px;
+
+    margin: 50px auto;
+
+    padding: 35px;
+
+    background-color: white;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+#blogDetails h1 {
+    color: #23438c;
+
+    margin-bottom: 15px;
+
+    font-size: 38px;
+}
+
+#blogDetails p {
+    margin-bottom: 15px;
+
+    color: #444;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
 
 footer {
     background-color: #17264d;
@@ -386,24 +598,70 @@ footer {
 }
 
 
-/* ------------------------------
-   Responsive Design
------------------------------- */
+/* ==========================================
+   TABLET RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .blog-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    nav {
+        gap: 18px;
+    }
+}
+
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
 
 @media (max-width: 768px) {
 
     .navbar {
         flex-direction: column;
+
         gap: 15px;
+
+        padding: 18px 15px;
+    }
+
+    .logo {
+        font-size: 28px;
     }
 
     nav {
-        gap: 15px;
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 12px 18px;
     }
+
+    nav a {
+        font-size: 15px;
+    }
+
+
+    /* Hero */
 
     .hero {
         flex-direction: column;
+
         text-align: center;
+
+        padding: 45px 20px;
+
+        gap: 30px;
     }
 
     .hero-content {
@@ -411,23 +669,178 @@ footer {
     }
 
     .hero-content h1 {
-        font-size: 36px;
+        font-size: 34px;
+    }
+
+    .hero-content p {
+        font-size: 17px;
     }
 
     .hero-image {
         width: 100%;
-        margin-top: 30px;
+    }
+
+
+    /* Blogs */
+
+    .blogs {
+        padding: 40px 15px;
+    }
+
+    .blogs h2 {
+        font-size: 30px;
     }
 
     .blog-container {
         grid-template-columns: 1fr;
+
+        gap: 20px;
     }
 
+
+    /* Forms */
+
     .form-container {
-        width: 95%;
+        width: auto;
+
+        margin: 35px 15px;
+
+        padding: 25px 20px;
+    }
+
+    .form-container h2 {
+        font-size: 26px;
+    }
+
+
+    /* Dashboard */
+
+    .dashboard {
+        padding: 35px 15px;
+    }
+
+    .dashboard h1 {
+        font-size: 30px;
+    }
+
+    .dashboard h2 {
+        font-size: 26px;
+    }
+
+
+    /* Profile */
+
+    .profile-section {
+        padding: 20px;
+
+        text-align: left;
+    }
+
+
+    /* Search */
+
+    .search-container {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .search-container input,
+    .search-container select {
+        width: 100%;
+    }
+
+
+    /* Blog actions */
+
+    .blog-actions {
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        flex: 1;
+
+        min-width: 100px;
+    }
+
+
+    /* Blog details */
+
+    #blogDetails {
+        margin: 30px 15px;
+
+        padding: 25px 20px;
+    }
+
+    #blogDetails h1 {
+        font-size: 30px;
+    }
+}
+
+
+/* ==========================================
+   SMALL MOBILE DEVICES
+========================================== */
+
+@media (max-width: 480px) {
+
+    .logo {
+        font-size: 25px;
+    }
+
+    nav {
+        gap: 10px 14px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .hero-content h1 {
+        font-size: 29px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%;
+
+        text-align: center;
+
+        padding: 12px 18px;
+    }
+
+    .blog-card {
+        padding: 18px;
+    }
+
+    .blog-card h3 {
+        font-size: 20px;
+    }
+
+    .dashboard h1 {
+        font-size: 27px;
+    }
+
+    .profile-section {
+        font-size: 15px;
     }
 
     .blog-actions {
-        justify-content: center;
+        flex-direction: column;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        width: 100%;
+    }
+
+    footer {
+        font-size: 14px;
     }
 }
